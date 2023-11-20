@@ -13,3 +13,12 @@ We provide 5 scripts that correspond to the analyses performed using R, as descr
 The first file `00_Definitions.R` has to be run before all the others, because it is where the landmarks, curves, contextual data and related visualization function and parameters are described. 
 
 The other R scripts can be run independently (recommended, because there may be some variable names conflicts). 
+
+The raw data is provided as separate files in the OSF repository <https://osf.io/9mtwh/?view_only=88a550a637f84615b5666d69278309d4>
+
+Data files are: 
+
+* `Grunstra_et_al_Afrotheria_contextual.csv`: contextual data => used for 2B-PLS and scatter plots of PCA and PLS
+* `Grunstra_et_al_Afrotheria_landmarks_raw.csv`: 3D landmark coordinates (13 anatomical landmarks, 111 semilandmarks) on the bony labyrinth for the 40 taxa => used for the GPA
+* `Grunstra_et_al_Afrotheria_landmarks_slid_not_aligned.csv`: 3D landmark coordinates (13 anatomical landmarks, 111 semilandmarks) on the bony labyrinth for the 40 taxa, after semilandmark sliding (in the software Mathematica, but similar algorithm provided in R) => used for the computation of Procrustes distances, the PCA and the PLS analyses
+* `Grunstra_et_al_Afrotheria_phyl_tree.txt`: phylogenetic tree of the 40 taxa in NEXUS format => used for the phylogenetic PLS and the computation of the phylogenetic signal
