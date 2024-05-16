@@ -4,11 +4,12 @@ In this document we briefly describe the R scripts provided as a complement of t
 
 We provide 5 scripts that correspond to the analyses performed using R, as described in the main text. Five files are provided: 
 
-* `00_Definitions.R`: landmark definition, preparation of contextual data, creation of teh function `plotLaby`
+* `00_Definitions.R`: landmark definition, preparation of contextual data, creation of the function `plotLaby` for visualization
 * `01_GPA.R`: semilandmark sliding, GPA, outliers, visualization
 * `02_ProcD.R`: pairwise Procrustes distances, cross-validations
 * `03_PCA.R`: PCA of the Procrustes shape coordinates
 * `04_PLS.R`: 2B-PLS, cross-validations, phylogenetic signal in the PLS scores, phylogenetic PLS
+* `05_WI.R`: Wheatsheaf index (Arbuckle et al. 2014 *Meth. Ecol. Evol.*)
 
 The first file `00_Definitions.R` has to be run before all the others, because it is where the landmarks, curves, contextual data and related visualization function and parameters are described. 
 
