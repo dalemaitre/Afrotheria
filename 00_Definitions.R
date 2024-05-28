@@ -4,9 +4,9 @@
 # Date: 2023-11-20
 # -------------------------------------------------------------------------------------------
 # R version: 4.3.1
-# Required extensions: geomorph, Morpho
+# Required extensions: -
 # -------------------------------------------------------------------------------------------
-# Aims: Define all parameters and fucntions for the analysis
+# Aims: Define all parameters and functions for the analysis
 # of the 13 anatomical landmarks and 111 semilandmarks placed on the bony labyrinth 
 # for 40 taxa (20 Afrotheria, 20 non-afrotherian)
 # and their visualization as a 3D plot
@@ -19,7 +19,7 @@
 
 # ---- Set working directory (optional) ----
 
-setwd( "./Afrotheria")
+#setwd( "./Afrotheria")
 
 # ---- Definitions: landmarks ----
 
