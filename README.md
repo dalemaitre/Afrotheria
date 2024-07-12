@@ -4,7 +4,7 @@ In this document we briefly describe how to do the analyses for the manuscript *
 
 R scripts are provided in the GitHub repository.  
 
-The raw data is provided as separate files in the OSF repository <https://osf.io/9mtwh/?view_only=88a550a637f84615b5666d69278309d4>. 
+The raw data is provided as separate files in the OSF repository <https://osf.io/9mtwh/>. 
 
 # 1. System requirement
 
@@ -74,7 +74,10 @@ The name of the project appears on the upper right corner of the window. There y
 setwd("C:/.../MyFolder")  # change the path to fit the relevant folder
 ```
 
-2. Open the first file `00_Definitions.R` and run all lines in the console. This script has to be run before all the others, because it is where the landmarks, curves, contextual data and related visualization function and parameters are described and created. In RStudio, data, values and functions are visible in the "Environment tab.  
+2. Open the first file `00_Definitions.R` and run all lines in the console. This script has to be run before all the others, because it is where the landmarks, curves, contextual data and related visualization function and parameters are described and created. In RStudio, data, values and functions are visible in the "Environment tab.Alternatively, it is possible to run the whoe script with the command:   
+```{r def}
+source("00_Definitions.R")
+```
 
 3. Open the script of interest. All R scripts other than `00_Definitions.R` can be run independently (recommended, because there may be some variable names conflicts).  
 
@@ -89,7 +92,7 @@ library(geomorph)  # here an example to load the package "geomorph"
 
 ## Description of the raw data
 
-The raw data is provided as separate files in the OSF repository <https://osf.io/9mtwh/?view_only=88a550a637f84615b5666d69278309d4>  
+The raw data is provided as separate files in the OSF repository <https://osf.io/9mtwh/>  
 
 Data files are:
 
