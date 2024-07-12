@@ -25,6 +25,7 @@ library(Morpho)  # geometric morphometrics
 # ---- Load raw landmark coordinates ----
 
 # First, run the R script '00_Definitions'
+source("00_Definitions.R")
 
 # Load the raw landmark coordinates
 raw_data <- read.csv("Grunstra_et_al_Afrotheria_landmarks_raw.csv")
