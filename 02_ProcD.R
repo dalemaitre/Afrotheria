@@ -1,7 +1,7 @@
 # ===========================================================================================
 # Title: Afrotheria - Computation of pairwise Procrustes distances
 # Author: Anne Le Maitre
-# Date: 2023-10-16
+# Date: 2024-07-12
 # -------------------------------------------------------------------------------------------
 # R version: 4.3.1
 # Required extensions: geomorph, Morpho
@@ -22,6 +22,9 @@ library(geomorph)  # geometric morphometrics
 library(Morpho)  # geometric morphometrics
 
 # ---- Load data ----
+
+# First, run the R script '00_Definitions'
+source("00_Definitions.R")
 
 # Here we directly load the slid landmark coordinates
 # They are in the original coordinate space
@@ -234,6 +237,10 @@ points(x = c(1:2), y = c(median.af_an[1], median.af_nan[1]),
 # Back to normal parameters
 par(mfrow = c(1,1), mar = c(5, 4, 4, 2) + 0.1)
 
+# OPTIONAL export data
+write.csv(rbind(mean.af_an, mean.af_nan, median.af_an, median.af_nan), 
+          file = "Grunstra_et_al_Afrotheria_ProcD_LooCV.csv")
+
 # ---- Leave-two-out cross-validation ----
 
 # Here we check if the average distance (expressed as the mean or the median)
@@ -317,3 +324,8 @@ points(x = c(1:2), y = c(median.af_an[1], median.af_nan[1]),
        pch = 16, col = "blue")
 # Back to normal parameters
 par(mfrow = c(1,1), mar = c(5, 4, 4, 2) + 0.1)
+
+# OPTIONAL export data
+write.csv(rbind(mean.af_an, mean.af_nan, median.af_an, median.af_nan), 
+          file = "Grunstra_et_al_Afrotheria_ProcD_LtoCV.csv")
+

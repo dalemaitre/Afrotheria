@@ -1,7 +1,7 @@
 # ===========================================================================================
 # Title: Afrotheria - Principal component analysis (PCA)
 # Author: Anne Le Maitre, Nicole D. S. Grunstra
-# Date: 2023-10-23
+# Date: 2024-07-12
 # -------------------------------------------------------------------------------------------
 # R version: 4.3.1
 # Required extensions: ape, geomorph, Morpho, ggrepel, phytools
@@ -30,6 +30,9 @@ library(phytools)  # phylogenetic signal
 library(ggrepel)  # plots
 
 # ---- 1.3 Prepare contextual data ----
+
+# First, run the R script '00_Definitions'
+source("00_Definitions.R")
 
 # Center and scale contextual variables
 ECOL <- as.matrix(Afrotheria[, -c(1:4)])  # matrix of the 12 contextual variables
@@ -76,7 +79,6 @@ plot(tree, cex = .8)
 
 # 2B-PLS
 afro.pls <- pls2B(A.gpa$rotated, ECOL_std)  # analysis
-rownames(afro.pls$svd$v) <- colnames(ECOL_std)  # contextual variable names
 
 # Table of the proportion of covariance explained by each PLS dimension
 afro.pls$CoVar
@@ -85,6 +87,19 @@ afro.pls$CoVar
 plot(afro.pls$CoVar[, 2], type = "b", col = "blue", las = 1, 
      main = "Scree plot", xlab = "Dimension", 
      ylab = "% of total covariance explained")
+
+# Rename column and row names for future export and analyses
+colnames(afro.pls$Xscores) <- paste("PLS", 1:ncol(afro.pls$Xscores), sep = "")
+colnames(afro.pls$Yscores) <- paste("PLS", 1:ncol(afro.pls$Yscores), sep = "")
+colnames(afro.pls$svd$u) <- paste("PLS", 1:ncol(afro.pls$svd$u), sep = "")
+colnames(afro.pls$svd$v) <- paste("PLS", 1:ncol(afro.pls$svd$v), sep = "")
+rownames(afro.pls$svd$v) <- colnames(ECOL_std)  # contextual variable names
+
+# OPTIONAL: export data
+#write.csv(afro.pls$Xscores, file = "Grunstra_et_al_Afrotheria_PLS_ShapeScores.csv")
+#write.csv(afro.pls$Yscores, file = "Grunstra_et_al_Afrotheria_PLS_ContextScores.csv")
+#write.csv(afro.pls$svd$u, file = "Grunstra_et_al_Afrotheria_PLS_ShapeLoadings.csv")
+#write.csv(afro.pls$svd$v, file = "Grunstra_et_al_Afrotheria_PLS_ContextLoadings.csv")
 
 # ---- 2.2 Scatter plot: PLS scores ----
 
@@ -108,7 +123,26 @@ ggplot(data = PLSscores, aes(x = Xscores,
                   color = "black", 
                   max.overlaps = Inf) +
   geom_point(size = 2.5) +
-  scale_color_manual(values = c("darkgreen", "orange", "lightblue", "darkblue", "darkred")) +
+  scale_color_manual(values = couleurs) +
+  theme_classic() + 
+  xlab("shape scores") +
+  ylab("context scores")
+
+# Scatter plot of shape scores vs. context scores
+PLSscores$Habitat <- factor(pch.ecol2)
+PLSscores$Clade <- col.ecol2
+ggplot(data = PLSscores, aes(x = Xscores, 
+                             y = Yscores, 
+                             shape = Habitat, colour = Clade, 
+                             label = Afrotheria$CommonName)) +
+  geom_text_repel(box.padding = 0.5,
+                  segment.curvature = -0.1,
+                  segment.ncp = 3,
+                  segment.angle = 20, 
+                  color = "black", 
+                  max.overlaps = Inf) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = c("black", "blue")) +
   theme_classic() + 
   xlab("shape scores") +
   ylab("context scores")
@@ -261,7 +295,6 @@ K_context
 
 # Phylogenetic PLS
 afro.phyl.pls <- phylo.integration(A.gpa$rotated, ECOL_std, phy = tree)
-rownames(afro.phyl.pls$svd$v) <- colnames(ECOL_std)  # contextual variable names
 
 # Summary results
 summary(afro.phyl.pls)
@@ -275,6 +308,19 @@ dimnames(afro.phyl.pls$CoVar) <- list(1:12, c("singular value", "% total covar."
 plot(afro.phyl.pls$CoVar[, 2], type = "b", col = "blue", las = 1, 
      main = "Scree plot", xlab = "Dimension", 
      ylab = "% of total covariance explained")
+
+# Rename column and row names for future export and analyses
+colnames(afro.phyl.pls$XScores) <- paste("PLS", 1:ncol(afro.phyl.pls$XScores), sep = "")
+colnames(afro.phyl.pls$YScores) <- paste("PLS", 1:ncol(afro.phyl.pls$YScores), sep = "")
+colnames(afro.phyl.pls$svd$u) <- paste("PLS", 1:ncol(afro.phyl.pls$svd$u), sep = "")
+colnames(afro.phyl.pls$svd$v) <- paste("PLS", 1:ncol(afro.phyl.pls$svd$v), sep = "")
+rownames(afro.phyl.pls$svd$v) <- colnames(ECOL_std)  # contextual variable names
+
+# OPTIONAL: export data
+#write.csv(afro.phyl.pls$XScores, file = "Grunstra_et_al_Afrotheria_phylPLS_ShapeScores.csv")
+#write.csv(afro.phyl.pls$YScores, file = "Grunstra_et_al_Afrotheria_phylPLS_ContextScores.csv")
+#write.csv(afro.phyl.pls$svd$u, file = "Grunstra_et_al_Afrotheria_phylPLS_ShapeLoadings.csv")
+#write.csv(afro.phyl.pls$svd$v, file = "Grunstra_et_al_Afrotheria_phylPLS_ContextLoadings.csv")
 
 # ---- 5.2 Scatter plot: phylogenetic PLS scores ----
 
@@ -298,7 +344,7 @@ ggplot(data = PLSscores, aes(x = Xscores,
                   color = "black", 
                   max.overlaps = Inf) +
   geom_point(size = 2.5) +
-  scale_color_manual(values = c("darkgreen", "orange", "lightblue", "darkblue", "darkred")) +
+  scale_color_manual(values = couleurs) +
   theme_classic() + 
   xlab("shape scores") +
   ylab("context scores")

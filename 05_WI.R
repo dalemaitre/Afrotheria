@@ -1,12 +1,12 @@
 # ===========================================================================================
 # Title: Afrotheria - Computation of the Wheatsheaf index
 # Authors: Nicole D. S. Grunstra, Anne Le Maitre
-# Date: 2024-05-16
+# Date: 2024-07-12
 # -------------------------------------------------------------------------------------------
 # R version: 4.3.3
 # Required extensions: geomorph, Morpho, ape, phytools
 # -------------------------------------------------------------------------------------------
-# Aims: Compute Wheatsheaf index (Arbuckle et al. 2014 Methods Ecol Evol)
+# Aims: Compute Wheatsheaf index (Arbuckle et al. 2014 Meth. Ecol. Evol.)
 # for the 40 taxa (20 Afrotheria, 20 non-afrotherian analogues)
 # Input: 
 # - Contextual data: Results of the script "00_Definitions.R"
@@ -23,8 +23,8 @@ library(phytools)  # phylogenetic analyses
 
 # ---- Load Procrustes coordinates ----
 
-# Before using the present script, run the script '00_Definitions.R' 
-# to get contextual data (in particular the section 'Contextual data')
+# First, run the R script '00_Definitions'
+source("00_Definitions.R")
 
 # Here we directly load the slid landmark coordinates
 # They are in the original coordinate space

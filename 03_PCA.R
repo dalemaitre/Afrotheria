@@ -1,7 +1,7 @@
 # ===========================================================================================
 # Title: Afrotheria - Principal component analysis (PCA)
 # Author: Anne Le Maitre
-# Date: 2023-10-23
+# Date: 2024-07-12
 # -------------------------------------------------------------------------------------------
 # R version: 4.3.1
 # Required extensions: geomorph, Morpho, ggrepel
@@ -22,6 +22,9 @@ library(Morpho)  # geometric morphometrics
 library(ggrepel)  # plots
 
 # ---- Load landmark data ----
+
+# First, run the R script '00_Definitions'
+source("00_Definitions.R")
 
 # Here we directly load the slid landmark coordinates
 # They are in the original coordinate space
@@ -72,7 +75,7 @@ ggplot(data = PCscores, aes(x = PC1,
                   color = "black", 
                   max.overlaps = Inf) +
   geom_point(size = 2.5) +
-  scale_color_manual(values = c("darkgreen", "orange", "lightblue", "darkblue", "darkred")) +
+  scale_color_manual(values = couleurs) +
   theme_classic() + 
   xlab(paste("PC1 (", variance[1], "%)", sep = "")) +
   ylab(paste("PC2 (", variance[2], "%)", sep = ""))
@@ -90,7 +93,7 @@ ggplot(data = PCscores, aes(x = PC3,
                   color = "black", 
                   max.overlaps = Inf) +
   geom_point(size = 2.5) +
-  scale_color_manual(values = c("darkgreen", "orange", "lightblue", "darkblue", "darkred")) +
+  scale_color_manual(values = couleurs) +
   theme_classic() + 
   xlab(paste("PC3 (", variance[3], "%)", sep = "")) +
   ylab(paste("PC4 (", variance[4], "%)", sep = ""))
@@ -119,4 +122,9 @@ layout3d(matrix(1:2, ncol = 2, byrow = TRUE))  # 2 plots in the same window
 plotLaby(A[, , 1], title = paste("-", std, "sd"))  # Negative scores
 next3d()  # Go to the next 3D plot
 plotLaby(A[, , 2], title = paste("+", std, "sd"))  # Positive scores
+
+# ---- OPTIONAL Export data ----
+
+#write.csv(A.gpa$PCscores, file = "Grunstra_et_al_Afrotheria_PCA_Scores.csv")
+#write.csv(A.gpa$PCs, file = "Grunstra_et_al_Afrotheria_PCA_Loadings.csv")
 
